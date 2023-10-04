@@ -15,8 +15,6 @@ export default function App() {
     const [cardNumberError, setCardNumberError] = useState("");
     const [dateError, setDateError] = useState("");
     const [pinError, setPinError] = useState("");
-
-    // Validation functions
     const validateName = () => {
         if (!name) {
             setNameError("Name can't be blank.");
@@ -65,7 +63,7 @@ export default function App() {
         return true;
     };
 
-    // Handle form submission
+    
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -75,12 +73,12 @@ export default function App() {
         const validPin = validatePin();
 
         if (validName && validCardNumber && validDate && validPin) {
-            // Handle successful form submission
+           
             setConfirmed(true);
         }
     };
 
-    // Helper functions for validation
+  
     const isAlphabet = (str) => {
         let char = str.split("");
 
@@ -117,35 +115,25 @@ export default function App() {
 
     const isValidDate = (dateStr) => {
         if (!/^\d{2}\/\d{2}$/.test(dateStr)) {
-            return false; // Format should be MM/YY
+            return false; 
         }
 
         const [month, year] = dateStr.split("/");
         const currentDate = new Date();
-        const currentYear = currentDate.getFullYear() % 100; // Get last two digits of the current year
-        const currentMonth = currentDate.getMonth() + 1; // Month is zero-based
+        const currentYear = currentDate.getFullYear() % 100;
+        const currentMonth = currentDate.getMonth() + 1; 
 
         if (parseInt(year, 10) < currentYear) {
-            return false; // Year is in the past
+            return false; 
         } else if (
             parseInt(year, 10) === currentYear &&
             parseInt(month, 10) < currentMonth
         ) {
-            return false; // Year is current, but month is in the past
+            return false; 
         }
 
         return true;
     };
-
-    // Format a number with spaces every 4 digits
-    // const formatNumber = (str, len) => {
-    //     str = str + "0".repeat(len - str.length);
-    //     let arr = [];
-    //     for (let i = 0; i <= str.length; i += 4) {
-    //         arr.push(str.slice(i, i + 4));
-    //     }
-    //     return arr.join(" ");
-    // };
 
     return (
         <>
